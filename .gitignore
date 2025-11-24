@@ -1,0 +1,20 @@
+# Ignore generated subfolders
+**/target/**
+**/bin/**
+**/boot/**
+**/classes/**
+**/out/**
+**/build/**
+**/dist/**
+
+# Ignore generated files
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.tmp
+*.bak
+*.swp
+*.lock
+**/*.class
