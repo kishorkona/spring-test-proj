@@ -18,3 +18,6 @@
 *.swp
 *.lock
 **/*.class
+
+#ignore IDE specific files
+.idea/
