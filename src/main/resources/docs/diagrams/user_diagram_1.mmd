@@ -1,0 +1,11 @@
+journey
+    title User Journey for getEmployeeByJob Endpoint
+    section API Request
+        User sends GET /api/employee/byjob/{job} request: 5: User
+    section Controller Processing
+        Controller receives request and extracts 'job' path variable: 4: System
+        Controller calls employeeDataBuilder.getEmployeesAsList(): 3: System
+        Controller filters employees by job: 3: System
+    section API Response
+        Controller returns filtered employee list in HTTP 200 response: 5: System
+        User receives list of employees with matching job: 5: User

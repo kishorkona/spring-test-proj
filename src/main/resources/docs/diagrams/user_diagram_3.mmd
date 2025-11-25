@@ -1,0 +1,53 @@
+sequenceDiagram
+    autonumber
+    participant S as ValidateCardinal3DResponseServiceNSEImpl
+    participant V as ValidationPaymentHelper
+    participant Env as Environment
+    participant CXP as PaymentCXPServices
+    participant H as PaymentServiceHelper
+    participant R as RedisHelper
+    participant Crypto as VZWDESUtil
+
+    S->>V: validateCardinal3DResponse(request)
+    alt Validation fails
+        V-->>S: Error400Response
+        S-->>Caller: Mono.just(Error400Response)
+    else Validation passes
+        S->>S: addCustomLog(request)
+        S->>Env: getProperty(MAX_FRAUD_PAYMENT_ALLOWED)
+        S->>S: fraudCount = sessionData.card3DSCount or "0"
+        alt Fraud count exceeded
+            S->>V: createFraudCountExceededErrorMessage("/confirmSubmit")
+            V-->>S: Mono<Error400Response>
+            S-->>Caller: Mono.just(Error400Response)
+        else sessionData null
+            S-->>Caller: Mono.just(Error400Response) (fraud exceeded path)
+        else Proceed
+            S->>S: populate3dSecureCXPRequest(...)
+            S->>CXP: upsertConfirmSubmit3D(cxpRequest)
+            CXP-->>S: ConfirmSubmit3DCXPResponse
+            alt PreAuthSuccess == "true" AND intendType == NSE_ACC
+                S->>V: populateGetCheckoutDetailsCxpRequest(...)
+                S->>H: getCheckoutDetails(request)
+                H-->>S: CheckoutDetailsCXPResponse
+            else Skip checkout details
+                S->>S: use empty CheckoutDetailsCXPResponse
+            end
+            opt Tokenized value present & not QA & test flags not triggered
+                S->>Crypto: shaEncrypt(tokenizedValue)
+                Crypto-->>S: encryptedToken
+                S->>R: upsertSessionDataByKey("tokenizedCreditCard", encryptedToken)
+                R-->>S: ack
+            end
+            opt innovis phone numbers present
+                S->>R: upsertSessionDataByMap("innovisPhoneNumbers", phoneMap)
+                R-->>S: ack
+            end
+            S->>S: soeResponseCall(cxpRes, request, checkoutDetails, channelId, sessionData)
+            S-->>Caller: Mono.just(SOEResponse)
+            alt getCheckoutDetails failure
+                S->>S: soeResponseCall(cxpRes, request, emptyCheckoutDetails, channelId, sessionData)
+                S-->>Caller: Mono.just(SOEResponse)
+            end
+        end
+    end

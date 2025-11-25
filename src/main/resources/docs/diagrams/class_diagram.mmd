@@ -1,0 +1,27 @@
+classDiagram
+    class EmployeeRestController {
+        +geAllEmployees(): ResponseEntity~List<Employee>~
+        +getEmployeeById(id: Long): ResponseEntity~List<Employee>~
+        +getEmployeeByJob(job: String): ResponseEntity~List<Employee>~
+        +addEmployees(emp: Emp): ResponseEntity~String~
+        -empService: EmployeeService
+        -employeeDataBuilder: EmployeeDataBuilder
+    }
+
+    class EmployeeService {
+        +addEmployees(emp: Emp): boolean
+    }
+
+    class EmployeeDataBuilder {
+        +getEmployeesAsList(): List~Employee~
+    }
+
+    class Emp
+    class Employee
+
+    EmployeeRestController --> EmployeeService : uses
+    EmployeeRestController --> EmployeeDataBuilder : uses
+    EmployeeRestController ..> Emp : parameter
+    EmployeeRestController ..> Employee : returns
+    EmployeeService ..> Emp : parameter
+    EmployeeDataBuilder ..> Employee : builds

@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant Client
+    participant Dispatcher as Spring DispatcherServlet
+    participant VersionMap as ApiVersionHandlerMapping
+    participant Controller as MyApiVersionController
+    participant Converter as HttpMessageConverter
+
+    Client->>Dispatcher: GET /products (v2)
+    Dispatcher->>VersionMap: Resolve handler by path + @ApiVersion("v2")
+    VersionMap-->>Dispatcher: HandlerMethod (getProductV2)
+    Dispatcher->>Controller: Invoke getProductV2()
+    Controller-->>Dispatcher: String response
+    Dispatcher->>Converter: Write String to HTTP response
+    Converter-->>Client: 200 OK + body
