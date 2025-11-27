@@ -35,7 +35,7 @@ public class EmployeeRestController {
             if(responseEntity.getStatusCode()==HttpStatus.OK) {
                 if(responseEntity.getBody().getStatus() != MyConstants.SUCCESS) {
                     apiResponse.setData(new HashMap<>());
-                    apiResponse.getData().put("resp", responseEntity.getBody());
+                    apiResponse.setData(responseEntity.getBody());
                     apiResponse.setCode(MyConstants.SUCCESS_CODE);
                     apiResponse.setStatus(MyConstants.SUCCESS);
                     return new ResponseEntity(apiResponse, HttpStatus.OK);
@@ -60,7 +60,7 @@ public class EmployeeRestController {
             if(responseEntity.getStatusCode()==HttpStatus.OK) {
                 if(responseEntity.getBody().getStatus() != MyConstants.SUCCESS) {
                     apiResponse.setData(new HashMap<>());
-                    apiResponse.getData().put("resp", responseEntity.getBody());
+                    apiResponse.setData(responseEntity.getBody());
                     apiResponse.setCode(MyConstants.SUCCESS_CODE);
                     apiResponse.setStatus(MyConstants.SUCCESS);
                     return new ResponseEntity(apiResponse, HttpStatus.OK);

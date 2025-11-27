@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(value = "http://localhost:4200/")
 @RequestMapping(value = "/api/failover")
 public class FailoverRestController {
 
@@ -33,7 +34,7 @@ public class FailoverRestController {
         ApiResponse apiResponse = new ApiResponse();
         List<Employee> data = employeeDataBuilder.getEmployeesAsList();
         apiResponse.setData(new HashMap<>());
-        apiResponse.getData().put("resp", data);
+        apiResponse.setData(data);
         apiResponse.setCode(MyConstants.SUCCESS_CODE);
         apiResponse.setStatus(MyConstants.SUCCESS);
         return new ResponseEntity(apiResponse, HttpStatus.OK);
@@ -46,7 +47,7 @@ public class FailoverRestController {
             System.out.println("------------>> getEmployeeById:"+Thread.currentThread().getName());
             ApiResponse apiResponse = new ApiResponse();
             apiResponse.setData(new HashMap<>());
-            apiResponse.getData().put("resp", emp);
+            apiResponse.setData(emp);
             apiResponse.setCode(MyConstants.SUCCESS_CODE);
             apiResponse.setStatus(MyConstants.SUCCESS);
             return new ResponseEntity(apiResponse, HttpStatus.OK);
