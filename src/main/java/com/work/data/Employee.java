@@ -1,8 +1,14 @@
 package com.work.data;
 
+import lombok.Data;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
-
+@Slf4j
+@Data
 public class Employee {
     private Integer employeeId;
     private String firstName;
@@ -45,103 +51,6 @@ public class Employee {
         return this.employeeId.compareTo(other.employeeId);
     }
     */
-    
-	public Integer getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public LocalDate getHireDate() {
-		return hireDate;
-	}
-
-	public void setHireDate(LocalDate hireDate) {
-		this.hireDate = hireDate;
-	}
-
-	public String getJobId() {
-		return jobId;
-	}
-
-	public void setJobId(String jobId) {
-		this.jobId = jobId;
-	}
-
-	public Double getSalary() {
-		return salary;
-	}
-
-	public void setSalary(Double salary) {
-		this.salary = salary;
-	}
-
-	public Double getCommissionPct() {
-		return commissionPct;
-	}
-
-	public void setCommissionPct(Double commissionPct) {
-		this.commissionPct = commissionPct;
-	}
-
-	public Integer getManagerId() {
-		return managerId;
-	}
-
-	public void setManagerId(Integer managerId) {
-		this.managerId = managerId;
-	}
-
-	public Integer getDepartmentId() {
-		return departmentId;
-	}
-
-	public void setDepartmentId(Integer departmentId) {
-		this.departmentId = departmentId;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
 	@Override
 	public String toString() {
 		return "Employee [employeeId=" + employeeId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
@@ -149,6 +58,4 @@ public class Employee {
 				+ salary + ", commissionPct=" + commissionPct + ", managerId=" + managerId + ", departmentId="
 				+ departmentId + ", age=" + age + "]";
 	}
-    
-    
 }

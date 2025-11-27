@@ -26,16 +26,16 @@ public class EmployeeRestController {
     @Autowired
     EmployeeDataBuilder employeeDataBuilder;
 
-    @GetMapping("/getAllEmployees")
-    public ResponseEntity<ApiResponse> geAllEmployees() {
-        System.out.println("------------>> geAllEmployees:"+Thread.currentThread().getName());
+    @GetMapping("/getAllEmployeesAsMap")
+    public ResponseEntity<ApiResponse> geAllEmployeesAsMap() {
+        System.out.println("------------>> getAllEmployeesAsMap:"+Thread.currentThread().getName());
         ApiResponse apiResponse = new ApiResponse();
         ResponseEntity<ApiResponse> responseEntity = empService.callExternalServiceGetEmployees();
         if(responseEntity != null) {
             if(responseEntity.getStatusCode()==HttpStatus.OK) {
                 if(responseEntity.getBody().getStatus() != MyConstants.SUCCESS) {
                     apiResponse.setData(new HashMap<>());
-                    apiResponse.setData(responseEntity.getBody());
+                    apiResponse.getData().put("resp", responseEntity.getBody());
                     apiResponse.setCode(MyConstants.SUCCESS_CODE);
                     apiResponse.setStatus(MyConstants.SUCCESS);
                     return new ResponseEntity(apiResponse, HttpStatus.OK);
@@ -51,16 +51,66 @@ public class EmployeeRestController {
         return new ResponseEntity(new ArrayList<>(), HttpStatus.OK);
     }
 
-    @GetMapping("/getEmployee/{id}")
-    public ResponseEntity<ApiResponse> getEmployeeById(@PathVariable("id") Long id) {
-        System.out.println("------------>> getEmployeeById:"+Thread.currentThread().getName());
+    @GetMapping("/getAllEmployeesAsList")
+    public ResponseEntity<ApiResponse> geAllEmployeesAsList() {
+        System.out.println("------------>> getAllEmployeesAsList:"+Thread.currentThread().getName());
+        ApiResponse apiResponse = new ApiResponse();
+        ResponseEntity<ApiResponse> responseEntity = empService.callExternalServiceGetEmployees();
+        if(responseEntity != null) {
+            if(responseEntity.getStatusCode()==HttpStatus.OK) {
+                if(responseEntity.getBody().getStatus() != MyConstants.SUCCESS) {
+                    apiResponse.setData(new HashMap<>());
+                    apiResponse.setList(responseEntity.getBody());
+                    apiResponse.setCode(MyConstants.SUCCESS_CODE);
+                    apiResponse.setStatus(MyConstants.SUCCESS);
+                    return new ResponseEntity(apiResponse, HttpStatus.OK);
+                } else if(responseEntity.getBody().getStatus() != MyConstants.DATA_UNAVAILABLE) {
+                    apiResponse.setCode(MyConstants.SUCCESS_CODE);
+                    apiResponse.setStatus(MyConstants.DATA_UNAVAILABLE);
+                    return new ResponseEntity(new ArrayList<>(), HttpStatus.OK);
+                }
+            }
+        }
+        apiResponse.setCode(MyConstants.SUCCESS_CODE);
+        apiResponse.setStatus(MyConstants.OTHER_ISSUE);
+        return new ResponseEntity(new ArrayList<>(), HttpStatus.OK);
+    }
+
+    @GetMapping("/getEmployeeByIdAsList/{id}")
+    public ResponseEntity<ApiResponse> getEmployeeByIdAsList(@PathVariable("id") Long id) {
+        System.out.println("------------>> getEmployeeByIdAsList:"+Thread.currentThread().getName());
         ApiResponse apiResponse = new ApiResponse();
         ResponseEntity<ApiResponse> responseEntity = empService.callExternalServiceGetEmployeeById(id);
         if(responseEntity != null) {
             if(responseEntity.getStatusCode()==HttpStatus.OK) {
                 if(responseEntity.getBody().getStatus() != MyConstants.SUCCESS) {
                     apiResponse.setData(new HashMap<>());
-                    apiResponse.setData(responseEntity.getBody());
+                    apiResponse.setList(responseEntity.getBody());
+                    apiResponse.setCode(MyConstants.SUCCESS_CODE);
+                    apiResponse.setStatus(MyConstants.SUCCESS);
+                    return new ResponseEntity(apiResponse, HttpStatus.OK);
+                } else if(responseEntity.getBody().getStatus() != MyConstants.DATA_UNAVAILABLE) {
+                    apiResponse.setCode(MyConstants.SUCCESS_CODE);
+                    apiResponse.setStatus(MyConstants.DATA_UNAVAILABLE);
+                    return new ResponseEntity(new ArrayList<>(), HttpStatus.OK);
+                }
+            }
+        }
+        apiResponse.setCode(MyConstants.SUCCESS_CODE);
+        apiResponse.setStatus(MyConstants.OTHER_ISSUE);
+        return new ResponseEntity(new ArrayList<>(), HttpStatus.OK);
+    }
+
+    @GetMapping("/getEmployeeByIdAsMap/{id}")
+    public ResponseEntity<ApiResponse> getEmployeeByIdAsMap(@PathVariable("id") Long id) {
+        System.out.println("------------>> getEmployeeByIdAsMap:"+Thread.currentThread().getName());
+        ApiResponse apiResponse = new ApiResponse();
+        ResponseEntity<ApiResponse> responseEntity = empService.callExternalServiceGetEmployeeById(id);
+        if(responseEntity != null) {
+            if(responseEntity.getStatusCode()==HttpStatus.OK) {
+                if(responseEntity.getBody().getStatus() != MyConstants.SUCCESS) {
+                    apiResponse.setData(new HashMap<>());
+                    apiResponse.getData().put("resp", responseEntity.getBody());
                     apiResponse.setCode(MyConstants.SUCCESS_CODE);
                     apiResponse.setStatus(MyConstants.SUCCESS);
                     return new ResponseEntity(apiResponse, HttpStatus.OK);

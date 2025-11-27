@@ -34,7 +34,7 @@ public class FailoverRestController {
         ApiResponse apiResponse = new ApiResponse();
         List<Employee> data = employeeDataBuilder.getEmployeesAsList();
         apiResponse.setData(new HashMap<>());
-        apiResponse.setData(data);
+        apiResponse.setList(data);
         apiResponse.setCode(MyConstants.SUCCESS_CODE);
         apiResponse.setStatus(MyConstants.SUCCESS);
         return new ResponseEntity(apiResponse, HttpStatus.OK);
@@ -47,7 +47,7 @@ public class FailoverRestController {
             System.out.println("------------>> getEmployeeById:"+Thread.currentThread().getName());
             ApiResponse apiResponse = new ApiResponse();
             apiResponse.setData(new HashMap<>());
-            apiResponse.setData(emp);
+            apiResponse.setList(emp);
             apiResponse.setCode(MyConstants.SUCCESS_CODE);
             apiResponse.setStatus(MyConstants.SUCCESS);
             return new ResponseEntity(apiResponse, HttpStatus.OK);
