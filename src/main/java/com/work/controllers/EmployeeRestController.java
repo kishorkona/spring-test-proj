@@ -34,8 +34,8 @@ public class EmployeeRestController {
         if(responseEntity != null) {
             if(responseEntity.getStatusCode()==HttpStatus.OK) {
                 if(responseEntity.getBody().getStatus() != MyConstants.SUCCESS) {
-                    apiResponse.setData(new HashMap<>());
-                    apiResponse.getData().put("resp", responseEntity.getBody());
+                    apiResponse.setMapData(new HashMap<>());
+                    apiResponse.getMapData().put("resp", responseEntity.getBody());
                     apiResponse.setCode(MyConstants.SUCCESS_CODE);
                     apiResponse.setStatus(MyConstants.SUCCESS);
                     return new ResponseEntity(apiResponse, HttpStatus.OK);
@@ -59,8 +59,8 @@ public class EmployeeRestController {
         if(responseEntity != null) {
             if(responseEntity.getStatusCode()==HttpStatus.OK) {
                 if(responseEntity.getBody().getStatus() != MyConstants.SUCCESS) {
-                    apiResponse.setData(new HashMap<>());
-                    apiResponse.setList(responseEntity.getBody());
+                    apiResponse.setMapData(new HashMap<>());
+                    apiResponse.setListData(responseEntity.getBody());
                     apiResponse.setCode(MyConstants.SUCCESS_CODE);
                     apiResponse.setStatus(MyConstants.SUCCESS);
                     return new ResponseEntity(apiResponse, HttpStatus.OK);
@@ -84,8 +84,8 @@ public class EmployeeRestController {
         if(responseEntity != null) {
             if(responseEntity.getStatusCode()==HttpStatus.OK) {
                 if(responseEntity.getBody().getStatus() != MyConstants.SUCCESS) {
-                    apiResponse.setData(new HashMap<>());
-                    apiResponse.setList(responseEntity.getBody());
+                    apiResponse.setMapData(new HashMap<>());
+                    apiResponse.setListData(responseEntity.getBody());
                     apiResponse.setCode(MyConstants.SUCCESS_CODE);
                     apiResponse.setStatus(MyConstants.SUCCESS);
                     return new ResponseEntity(apiResponse, HttpStatus.OK);
@@ -109,8 +109,8 @@ public class EmployeeRestController {
         if(responseEntity != null) {
             if(responseEntity.getStatusCode()==HttpStatus.OK) {
                 if(responseEntity.getBody().getStatus() != MyConstants.SUCCESS) {
-                    apiResponse.setData(new HashMap<>());
-                    apiResponse.getData().put("resp", responseEntity.getBody());
+                    apiResponse.setMapData(new HashMap<>());
+                    apiResponse.getMapData().put("resp", responseEntity.getBody());
                     apiResponse.setCode(MyConstants.SUCCESS_CODE);
                     apiResponse.setStatus(MyConstants.SUCCESS);
                     return new ResponseEntity(apiResponse, HttpStatus.OK);
