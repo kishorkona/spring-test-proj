@@ -8,9 +8,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @SpringBootApplication
 @ComponentScan({"com.work"})
 @EnableWebMvc
-public class SpringProjectStart {
+public class SpringTestProjApplicationStart {
 	public static void main(String[] args) {
-		SpringApplication.run(SpringProjectStart.class, args);
+		SpringApplication.run(SpringTestProjApplicationStart.class, args);
 	}
 
 }
