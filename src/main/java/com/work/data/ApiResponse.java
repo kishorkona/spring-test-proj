@@ -12,6 +12,6 @@ public class ApiResponse {
     private String code;
     private String status;
     private String message;
-    private Map<String, Object> mapData;
+    private Map<String, Object> data;
     private Object listData;
 }

@@ -10,20 +10,20 @@ import java.time.LocalDate;
 @Slf4j
 @Data
 public class Employee {
-    private Integer employeeId;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
-    private LocalDate hireDate;
-    private String jobId;
-    private Double salary;
-    private Double commissionPct;
-    private Integer managerId;
-    private Integer departmentId;
-    private Integer age;
+	private Integer employeeId;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String phoneNumber;
+	private LocalDate hireDate;
+	private String jobId;
+	private Double salary;
+	private Double commissionPct;
+	private Integer managerId;
+	private Integer departmentId;
+	private Integer age;
 
-    /*
+	/*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

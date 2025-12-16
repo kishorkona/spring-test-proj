@@ -1,6 +1,6 @@
 package test.com.work.service;
 
-import com.work.SpringTestProjApplicationStart;
+import com.work.SpringProjApplicationStart;
 import com.work.data.Employee;
 import com.work.service.EmployeeService;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = SpringTestProjApplicationStart.class)
+@SpringBootTest(classes = SpringProjApplicationStart.class)
 @AutoConfigureMockMvc
 public class EmployeeServiceTest {
 
