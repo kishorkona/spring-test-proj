@@ -25,7 +25,14 @@ public class EmployeeService {
     EmployeeDataBuilder employeeDataBuilder;
 
     @Autowired
+    EmployeeServiceNew employeeServiceNew;
+
+    @Autowired
     private RestTemplate restTemplate;
+
+    public List<Employee> getEmployeesNew() {
+        return employeeServiceNew.getEmployeesNew();
+    }
 
     public List<Employee> getEmployees() {
         return employeeDataBuilder.getEmployeesAsList();

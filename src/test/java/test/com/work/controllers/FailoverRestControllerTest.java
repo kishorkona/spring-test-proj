@@ -4,7 +4,9 @@ import com.work.SpringProjApplicationStart;
 import com.work.controllers.FailoverRestController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -12,8 +14,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(FailoverRestController.class)
-@ContextConfiguration(classes = SpringProjApplicationStart.class)
+//@WebMvcTest(FailoverRestController.class)
+//@ContextConfiguration(classes = SpringProjApplicationStart.class)
+@SpringBootTest(classes = SpringProjApplicationStart.class)
+@AutoConfigureMockMvc
 public class FailoverRestControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -34,6 +38,6 @@ public class FailoverRestControllerTest {
                 // [0] selects the first match from the filtered result.
                 // .name checks the 'name' field of that matched element.
                 //.andExpect(jsonPath("$[*][?(@.id == 42)].name").value("Special Widget"));
-                .andExpect(jsonPath("$[*][?(@.employeeId == 42)][0].firstName").value("Zechariah"));
+                .andExpect(jsonPath("$[*][?(@.employeeId == 6)].firstName").value("Cason"));
     }
 }
